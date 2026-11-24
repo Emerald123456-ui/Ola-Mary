@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ola Mary — Machine Learning Engineer &amp; STEM Educator</title>
+<meta name="description" content="Ola Mary, Machine Learning Engineer and STEM Educator from Zaria. First Class Computer Science, Ahmadu Bello University. Sentiment analysis, forecasting, predictive models, and maths, physics and tech course teaching.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Literata:opsz,wght@7..72,400;7..72,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F8; --surface:#FFFFFF; --ink:#151A33; --muted:#4A5275;
+  --indigo:#1F2A6B; --indigo-soft:#C9D3EC; --line:#D3D9EA;
+  --saffron:#E0A526; --pos:#1E7A55; --neg:#B2413A;
+  --on-indigo:#F2F4FB; --pattern:rgba(255,255,255,.09);
+  --bar:rgba(238,241,248,.86);
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+html{scroll-padding-top:4.5rem;scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Literata",Georgia,"Times New Roman",serif;font-size:1.0625rem;line-height:1.7}
+h1,h2,h3,.sans{font-family:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.15}
+a{color:inherit}
+a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid var(--saffron);outline-offset:3px;border-radius:4px}
+img{max-width:100%}
+.wrap{max-width:68rem;margin:0 auto;padding:0 1.5rem}
+
+/* Sticky navigation bar */
+.bar{position:sticky;top:0;z-index:20;background:var(--bar);
+  -webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);
+  border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;gap:1rem;height:3.5rem;
+  font-family:"Bricolage Grotesque",system-ui,sans-serif}
+.brand{font-weight:800;font-size:1.1rem;text-decoration:none;letter-spacing:-.01em;white-space:nowrap}
+.brand b{color:var(--saffron)}
+.bar nav{display:flex;gap:1.25rem;overflow-x:auto;scrollbar-width:none;font-size:.95rem;font-weight:600}
+.bar nav::-webkit-scrollbar{display:none}
+.bar nav a{text-decoration:none;color:var(--muted);white-space:nowrap;padding:.25rem 0;border-bottom:2px solid transparent}
+.bar nav a:hover{color:var(--ink);border-color:var(--saffron)}
+
+/* Hero: adire-inspired indigo cloth */
+.hero{background-color:var(--indigo);color:var(--on-indigo);position:relative;overflow:hidden;
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--pattern) 0 6px, transparent 7px),
+    repeating-linear-gradient(45deg, transparent 0 22px, var(--pattern) 22px 24px),
+    repeating-linear-gradient(-45deg, transparent 0 22px, var(--pattern) 22px 24px);
+  background-size:46px 46px, auto, auto}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center;padding-top:4rem;padding-bottom:4rem}
+.name{font-size:clamp(3rem,9vw,6.2rem);font-weight:800;letter-spacing:-.03em;margin:0 0 .9rem;line-height:.95}
+.roles{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.25rem;padding:0;list-style:none;
+  font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:600;font-size:1rem}
+.roles li{padding:.4rem .9rem;border-radius:999px;border:1.5px solid var(--saffron);color:var(--saffron)}
+.roles li:first-child{background:var(--saffron);color:#151A33}
+.hero p.lede{max-width:34rem;margin:0 0 1.75rem;opacity:.94}
+.links{display:flex;gap:.75rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:.45rem;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:600;text-decoration:none;
+  padding:.65rem 1.1rem;border-radius:999px;border:1.5px solid var(--on-indigo);transition:transform .2s ease,background .2s ease}
+.btn svg{width:1.1rem;height:1.1rem;flex:none}
+.btn.solid{background:var(--saffron);border-color:var(--saffron);color:#151A33}
+.btn:hover{transform:translateY(-2px)}
+.hero .btn:not(.solid):hover{background:rgba(255,255,255,.12)}
+.social{margin-top:.75rem}
+
+/* Portrait */
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.portrait{
+  width:clamp(7rem,20vw,10.5rem);   /* ~112px on phones, up to ~168px on desktop */
+  aspect-ratio:1/1;
+  margin:0 0 1.5rem;
+  padding:5px;
+  border-radius:50%;
+  --ang:0deg;                       /* ring angle, animated below */
+  background:conic-gradient(from var(--ang),var(--saffron),#FFF0B8 18%,var(--saffron) 40%,var(--indigo-soft) 70%,var(--saffron));  /* gold ring that slowly turns */
+  box-shadow:0 10px 28px rgba(10,14,40,.35);
+}
+.portrait img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;                 /* crops to a square without stretching */
+  object-position:center top;       /* keeps your face in frame */
+  border-radius:50%;
+  border:4px solid var(--indigo);
+}
+
+/* Live demo */
+.demo{background:var(--surface);color:var(--ink);border-radius:18px;padding:1.4rem;box-shadow:0 18px 40px rgba(10,14,40,.35)}
+.demo h2{font-size:1.15rem;margin:0 0 .35rem}
+.demo p{margin:0 0 .9rem;font-size:.92rem;color:var(--muted);line-height:1.55}
+.demo textarea{width:100%;min-height:5.5rem;resize:vertical;border:1.5px solid var(--line);border-radius:10px;padding:.7rem .8rem;
+  font:inherit;font-size:1rem;background:var(--bg);color:var(--ink)}
+.chips{display:flex;gap:.4rem;flex-wrap:wrap;margin:.7rem 0 1rem}
+.chips button{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:.82rem;border:1px solid var(--line);background:transparent;color:var(--muted);
+  border-radius:999px;padding:.3rem .7rem;cursor:pointer}
+.chips button:hover{color:var(--ink);border-color:var(--muted)}
+.verdict{display:flex;align-items:baseline;justify-content:space-between;font-family:"Bricolage Grotesque",system-ui,sans-serif}
+.verdict strong{font-size:1.6rem;transition:color .25s}
+.verdict span{font-size:.85rem;color:var(--muted)}
+.meter{height:10px;background:var(--line);border-radius:999px;margin-top:.5rem;position:relative;overflow:hidden}
+.meter i{position:absolute;top:0;bottom:0;left:50%;width:0;border-radius:999px;transition:all .3s ease}
+.cues{margin-top:.75rem;font-size:.85rem;color:var(--muted);min-height:1.4em}
+.cues mark{background:transparent;font-weight:500;padding:0 .1em}
+.cues .p{color:var(--pos)} .cues .n{color:var(--neg)}
+.demo small{display:block;margin-top:.8rem;font-size:.78rem;color:var(--muted);line-height:1.5}
+
+/* Little animations: hero entrance and turning ring */
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
+@keyframes turn{to{--ang:360deg}}
+.hero .wrap>div>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+.hero .wrap>div>.portrait{animation:pop .8s cubic-bezier(.2,.8,.2,1) both,turn 7s linear .8s infinite}
+.hero .wrap>div>:nth-child(2){animation-delay:.12s}
+.hero .wrap>div>:nth-child(3){animation-delay:.24s}
+.hero .wrap>div>:nth-child(4){animation-delay:.36s}
+.hero .wrap>div>:nth-child(5){animation-delay:.48s}
+.hero .wrap>div>:nth-child(6){animation-delay:.58s}
+.hero .demo{animation:rise .8s cubic-bezier(.2,.7,.2,1) .5s both}
+
+/* Highlights strip */
+.strip{background:var(--surface);border-bottom:1px solid var(--line)}
+.strip .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding-top:1.75rem;padding-bottom:1.75rem}
+.stat{text-align:center}
+.stat strong{display:block;font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:clamp(1.3rem,3.6vw,2rem);font-weight:800;color:var(--indigo);line-height:1.1}
+.stat span{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:.9rem;color:var(--muted)}
+
+section{padding:4.5rem 0}
+section h2.title{font-size:clamp(1.9rem,4vw,2.6rem);margin:0 0 .5rem;letter-spacing:-.02em}
+section .intro{color:var(--muted);max-width:40rem;margin:0 0 2.5rem}
+
+/* Projects */
+.projects{display:grid;grid-template-columns:repeat(6,1fr);gap:1.25rem}
+.proj{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;grid-column:span 2;
+  transition:transform .2s ease,box-shadow .2s ease}
+.proj:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(21,26,51,.12)}
+.proj.wide{grid-column:span 3}
+.proj.feature{grid-column:span 6;display:grid;grid-template-columns:1.2fr 1fr;gap:2rem;border-left:6px solid var(--saffron)}
+.proj h3{font-size:1.35rem;margin:.2rem 0 .6rem}
+.proj p{margin:0 0 1rem;font-size:.98rem}
+.status{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:.8rem;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:.4rem}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--pos)}
+.status.wip::before{background:var(--saffron)}
+.tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:auto 0 1rem;padding:0;list-style:none}
+.tags li{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:.8rem;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:.15rem .5rem}
+.repo{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:600;font-size:.92rem;color:var(--indigo);text-decoration-thickness:1.5px;text-underline-offset:3px}
+.flow{margin:0;padding:0;list-style:none;counter-reset:s}
+.flow li{counter-increment:s;display:flex;gap:.8rem;align-items:baseline;padding:.45rem 0;border-bottom:1px dashed var(--line);font-size:.95rem}
+.flow li::before{content:counter(s);font-family:"Bricolage Grotesque",system-ui,sans-serif;font-weight:800;color:var(--saffron);min-width:1.2rem}
+
+/* STEM educator */
+.teach{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.subjects{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.subject{background:var(--bg);border:1px solid var(--line);border-top:5px solid var(--saffron);border-radius:14px;padding:1.4rem}
+.subject h3{font-size:1.3rem;margin:0 0 .5rem}
+.subject p{margin:0;font-size:.98rem;color:var(--muted)}
+.taught{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:1.25rem}
+.school{border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.4rem}
+.school .when{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:.85rem;color:var(--muted)}
+.school h3{font-size:1.1rem;margin:.1rem 0 .2rem}
+.school p{margin:0;font-size:.95rem;color:var(--muted)}
+.bridge{margin:1.5rem 0 0;padding:1.25rem 1.5rem;border-radius:14px;background:var(--indigo);color:var(--on-indigo);max-width:none}
+.bridge strong{font-family:"Bricolage Grotesque",system-ui,sans-serif;color:var(--saffron)}
+
+/* Timeline */
+.journey{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.timeline{list-style:none;margin:0;padding:0;border-left:2px solid var(--indigo-soft)}
+.timeline li{position:relative;padding:0 0 2rem 1.6rem}
+.timeline li::before{content:"";position:absolute;left:-7px;top:.45rem;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2.5px solid var(--indigo)}
+.timeline li.now::before{background:var(--saffron);border-color:var(--saffron)}
+.timeline .when{font-family:"Bricolage Grotesque",system-ui,sans-serif;font-size:.85rem;color:var(--muted)}
+.timeline h3{font-size:1.15rem;margin:.15rem 0 .25rem}
+.timeline p{margin:0;font-size:.95rem;color:var(--muted)}
+.skills h3{font-size:1.05rem;margin:0 0 .6rem}
+.skills .group{margin-bottom:1.6rem}
+.cert{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:1.25rem 1.4rem;margin-top:1rem}
+.cert p{margin:.25rem 0 .75rem;font-size:.95rem;color:var(--muted)}
+
+/* Contact */
+.contact{background:var(--surface);border-top:1px solid var(--line)}
+.contact .wrap{display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap}
+.contact h2{font-size:clamp(1.8rem,4vw,2.4rem);margin:0 0 .4rem}
+.contact p{margin:0;color:var(--muted);max-width:30rem}
+.contact .links{max-width:30rem}
+.contact .links .btn{border-color:var(--indigo);color:var(--indigo)}
+.contact .links .btn.solid{color:#151A33;border-color:var(--saffron)}
+footer{padding:1.5rem 0 2rem;font-size:.85rem;color:var(--muted);font-family:"Bricolage Grotesque",system-ui,sans-serif;background:var(--surface)}
+
+/* Scroll reveal (only active when JavaScript runs) */
+.js .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal.in{opacity:1;transform:none}
+/* Project cards: heading shows at once, cards then arrive one by one */
+.js #work .reveal{opacity:1;transform:none}
+.js #work .proj{opacity:0}
+.js #work .reveal.in .proj{opacity:1;animation:rise .6s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:calc(var(--i) * 90ms)}
+.proj:nth-child(1){--i:0}.proj:nth-child(2){--i:1}.proj:nth-child(3){--i:2}.proj:nth-child(4){--i:3}
+.proj:nth-child(5){--i:4}.proj:nth-child(6){--i:5}.proj:nth-child(7){--i:6}
+
+@media (max-width:880px){
+  .hero .wrap{grid-template-columns:1fr;padding-top:3rem;padding-bottom:3rem;gap:2.25rem}
+  .proj,.proj.wide{grid-column:span 6}
+  .proj.feature{grid-template-columns:1fr;gap:1rem}
+  .journey{grid-template-columns:1fr}
+  .subjects,.taught{grid-template-columns:1fr}
+  .bar nav{gap:.9rem;font-size:.88rem}
+}
+@media (max-width:480px){
+  .brand{font-size:1rem}
+  .strip .wrap{gap:.5rem}
+}
+@media (min-width:881px) and (max-width:1060px){ .proj{grid-column:span 3} }
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important;animation:none!important}
+  .js #work .proj{opacity:1}
+  .btn:hover,.proj:hover{transform:none}
+  .js .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <a class="brand" href="#top">Ola <b>Mary</b></a>
+    <nav aria-label="Sections">
+      <a href="#work">Projects</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#journey">Experience</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <figure class="portrait">
+        <img src="Mary.jpeg" alt="Portrait of Ola Mary" width="600" height="600" fetchpriority="high">
+      </figure>
+      <h1 class="name">Ola Mary</h1>
+      <ul class="roles" aria-label="Roles">
+        <li>Machine Learning Engineer</li>
+        <li>STEM Educator</li>
+      </ul>
+      <p class="lede">I build models that turn business data into decisions, and I teach maths, physics and tech courses so students see how STEM connects to real life. First Class Computer Science graduate from Ahmadu Bello University in Zaria, now a Machine Learning Engineering Intern at ThriveAbia (Qurate HQ).</p>
+      <div class="links">
+        <a class="btn solid" href="#work">See my projects</a>
+        <a class="btn" href="https://github.com/Emerald123456-ui" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/mary-ola-44100a342" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <div class="links social">
+        <a class="btn" href="https://www.facebook.com/share/1CYXJTJCTR/" target="_blank" rel="noopener" aria-label="Ola Mary on Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+        <a class="btn" href="https://www.instagram.com/olaxcoemerald?knvt=M2sxZXN5NXVyd2t2" target="_blank" rel="noopener" aria-label="Ola Mary on Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+
+    <aside class="demo" aria-labelledby="demo-h">
+      <h2 id="demo-h">Try it: how does this review feel?</h2>
+      <p>Type a customer review, or pick one below.</p>
+      <label for="review" class="sans" style="position:absolute;left:-9999px">Customer review</label>
+      <textarea id="review" spellcheck="false">The fabric is beautiful and delivery was fast, but the stitching was a bit poor.</textarea>
+      <div class="chips" role="group" aria-label="Sample reviews">
+        <button type="button" data-t="I love these sandals! Great quality and the seller was so helpful.">Happy buyer</button>
+        <button type="button" data-t="Terrible experience. The bag arrived late and the strap broke after two days.">Unhappy buyer</button>
+        <button type="button" data-t="It is not bad for the price, would buy again.">Tricky one</button>
+      </div>
+      <div class="verdict" aria-live="polite"><strong id="label">Positive</strong><span id="score"></span></div>
+      <div class="meter" aria-hidden="true"><i id="bar"></i></div>
+      <div class="cues" id="cues"></div>
+      <small>A small word-scoring demo that runs in your browser. My trained scikit-learn sentiment model lives in the Sales Review Sentiment repo below.</small>
+    </aside>
+  </div>
+</header>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="stat"><strong>First Class</strong><span>B.Sc. Computer Science</span></div>
+    <div class="stat"><strong data-count="7">7</strong><span>machine learning projects</span></div>
+    <div class="stat"><strong>ML + STEM</strong><span>engineer and educator</span></div>
+  </div>
+</div>
+
+<main>
+<section id="work">
+  <div class="wrap reveal">
+    <h2 class="title">Projects</h2>
+    <p class="intro">Each project follows the full path from raw data to a model someone can use: cleaning, exploring, building features, training, evaluating and saving it for prediction.</p>
+
+    <div class="projects">
+      <article class="proj feature">
+        <div>
+          <span class="status">Team project</span>
+          <h3>Aba Craft AI</h3>
+          <p>An AI-powered customer insights platform for e-commerce businesses in Aba. I worked on the sentiment analysis module: cleaning and preprocessing customer text, extracting features, and classifying how customers feel about products, so sellers can see what is working and what to fix.</p>
+          <ul class="tags"><li>Python</li><li>Pandas</li><li>Scikit-learn</li><li>NLP</li></ul>
+          <a class="repo" href="https://github.com/Emerald123456-ui/ABA-CRAFT" target="_blank" rel="noopener">View repository</a>
+        </div>
+        <div>
+          <ol class="flow" aria-label="My part of the pipeline">
+            <li>Collect customer reviews and feedback</li>
+            <li>Clean and normalise the text</li>
+            <li>Turn words into features the model can read</li>
+            <li>Classify sentiment for each piece of feedback</li>
+            <li>Feed results into the insights platform</li>
+          </ol>
+        </div>
+      </article>
+
+      <article class="proj wide">
+        <span class="status">Deployed as an API</span>
+        <h3>Walmart Sales Forecasting</h3>
+        <p>Separate ARIMA time-series models for each of Walmart’s 45 stores. I tested stationarity with the ADF test, compared ARIMA orders per store and kept the one with the lowest test-set MAPE, then served 12-week sales forecasts through a FastAPI endpoint.</p>
+        <ul class="tags"><li>ARIMA</li><li>Time series</li><li>MAE / RMSE / MAPE</li><li>FastAPI</li></ul>
+        <a class="repo" href="https://github.com/Emerald123456-ui/walmart-sales-forecasting" target="_blank" rel="noopener">View repository</a>
+      </article>
+
+      <article class="proj wide">
+        <span class="status">Complete</span>
+        <h3>Sales Review Sentiment Analysis</h3>
+        <p>An end-to-end classifier that reads a product review and labels it positive or negative. Includes text cleaning, vectorisation, model training and evaluation, a saved model, and a script for predicting on new reviews.</p>
+        <ul class="tags"><li>Scikit-learn</li><li>Text vectorisation</li><li>Matplotlib</li><li>Seaborn</li></ul>
+        <a class="repo" href="https://github.com/Emerald123456-ui/Review-DATASET-ML" target="_blank" rel="noopener">View repository</a>
+      </article>
+
+      <article class="proj">
+        <span class="status">Complete</span>
+        <h3>House Price Prediction</h3>
+        <p>A regression model that estimates a home’s price from its features. Covers missing-value handling, feature selection and evaluation, with the trained model saved for reuse in a prediction app.</p>
+        <ul class="tags"><li>Regression</li><li>NumPy</li><li>Pickle</li></ul>
+        <a class="repo" href="https://github.com/Emerald123456-ui/HOUSE_PRICE_PREDICTION" target="_blank" rel="noopener">View repository</a>
+      </article>
+
+      <article class="proj">
+        <span class="status">Complete</span>
+        <h3>Customer Churn Prediction</h3>
+        <p>A classification model that flags customers likely to stop doing business with a company, so teams can reach out before they leave.</p>
+        <ul class="tags"><li>Classification</li><li>Feature engineering</li><li>Scikit-learn</li></ul>
+      </article>
+
+      <article class="proj">
+        <span class="status">Complete</span>
+        <h3>Customer Health Prediction</h3>
+        <p>A supervised model that predicts each customer’s health status from their records, helping a business prioritise which accounts need attention.</p>
+        <ul class="tags"><li>Supervised learning</li><li>Model evaluation</li></ul>
+      </article>
+
+      <article class="proj wide">
+        <span class="status wip">In progress</span>
+        <h3>Business Assistant</h3>
+        <p>An AI assistant for small businesses that brings my models together in one place, helping owners understand their customers and plan ahead.</p>
+        <ul class="tags"><li>NLP</li><li>FastAPI</li></ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="teaching" class="teach">
+  <div class="wrap reveal">
+    <h2 class="title">STEM Educator</h2>
+    <p class="intro">I teach maths, physics and tech courses, and I connect every topic to real life so students understand why it matters, not just how to pass the exam.</p>
+
+    <div class="subjects">
+      <article class="subject">
+        <h3>Mathematics</h3>
+        <p>Turning formulas into ideas students can reason with, from the basics up to senior-class problem solving.</p>
+      </article>
+      <article class="subject">
+        <h3>Physics</h3>
+        <p>Starting from the world around us, with real examples first and the equations after.</p>
+      </article>
+      <article class="subject">
+        <h3>Tech Courses</h3>
+        <p>Teaching tech courses that build practical digital skills, the first step towards computing and machine learning.</p>
+      </article>
+    </div>
+
+    <div class="taught">
+      <div class="school">
+        <span class="when">2024 – 2025</span>
+        <h3>Serjmo International School</h3>
+        <p>Maths and Physics Teacher for senior classes, also teaching tech courses.</p>
+      </div>
+      <div class="school">
+        <span class="when">2019 – 2023</span>
+        <h3>Wonder Land Academy</h3>
+        <p>General subjects, curriculum planning and student development.</p>
+      </div>
+    </div>
+
+    <p class="bridge"><strong>Where teaching meets machine learning:</strong> explaining a hard idea in plain words is the same skill whether I am teaching a quadratic equation or walking a business owner through a forecasting model.</p>
+  </div>
+</section>
+
+<section id="journey">
+  <div class="wrap journey reveal">
+    <div>
+      <h2 class="title">Experience</h2>
+      <p class="intro">Years of teaching maths and physics taught me to explain hard ideas simply, which I now bring to machine learning.</p>
+      <ol class="timeline">
+        <li class="now">
+          <span class="when">2026 – present</span>
+          <h3>Machine Learning Engineering Intern, ThriveAbia (Qurate HQ)</h3>
+          <p>Building, training and evaluating models in Python and scikit-learn; data cleaning, feature engineering and EDA; NLP and sentiment analysis work alongside mentors and engineers.</p>
+        </li>
+        <li>
+          <span class="when">2026</span>
+          <h3>Machine Learning Engineering Program, ThriveAbia (Qurate HQ)</h3>
+          <p>Intensive industry training in ML algorithms, NLP, model evaluation, API development with FastAPI and collaborative Git workflows.</p>
+        </li>
+        <li>
+          <span class="when">2018 – 2025</span>
+          <h3>B.Sc. Computer Science, First Class Honours</h3>
+          <p>Ahmadu Bello University, Zaria. Vice Chairperson of the 400 Level class, linking students and faculty.</p>
+        </li>
+        <li>
+          <span class="when">2024 – 2025</span>
+          <h3>Maths, Physics and Tech Courses Teacher, Serjmo International School</h3>
+          <p>Taught senior classes and connected STEM subjects to real life.</p>
+        </li>
+        <li>
+          <span class="when">2019 – 2023</span>
+          <h3>Teacher, Wonder Land Academy</h3>
+          <p>General subjects, curriculum planning and student development.</p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="skills">
+      <h2 class="title">Toolkit</h2>
+      <p class="intro">What I reach for, from first look at the data to a working API.</p>
+      <div class="group"><h3>Machine learning</h3>
+        <ul class="tags"><li>Scikit-learn</li><li>Regression</li><li>Classification</li><li>NLP</li><li>Time series (ARIMA)</li><li>Feature engineering</li><li>Model evaluation</li><li>Model selection</li></ul></div>
+      <div class="group"><h3>Data</h3>
+        <ul class="tags"><li>Python</li><li>Pandas</li><li>NumPy</li><li>EDA</li><li>Data cleaning</li><li>Matplotlib</li><li>Seaborn</li></ul></div>
+      <div class="group"><h3>Building and shipping</h3>
+        <ul class="tags"><li>FastAPI</li><li>Git and GitHub</li><li>Jupyter</li><li>VS Code</li><li>HTML, CSS, JavaScript</li><li>PHP and MySQL</li></ul></div>
+      <div class="group"><h3>Teaching</h3>
+        <ul class="tags"><li>Mathematics</li><li>Physics</li><li>Tech courses</li><li>Curriculum planning</li><li>Explaining complex ideas simply</li></ul></div>
+      <div class="group"><h3>Languages</h3>
+        <ul class="tags"><li>English</li><li>Yoruba</li><li>Hausa</li></ul></div>
+      <div class="cert">
+        <h3 style="margin:0">Machine Learning Engineering certificate</h3>
+        <p>Issued by ThriveAbia (Qurate HQ).</p>
+        <a class="repo" href="https://verify.netcredential.com/kKZrfm8yTT" target="_blank" rel="noopener">Verify certificate</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div>
+      <h2>Let’s work together</h2>
+      <p>Open to machine learning and data science roles, internships and projects, and to STEM teaching opportunities.</p>
+    </div>
+    <div class="links">
+      <a class="btn solid" href="mailto:olamary605@gmail.com">Email me</a>
+      <a class="btn" href="https://www.linkedin.com/in/mary-ola-44100a342" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/Emerald123456-ui" target="_blank" rel="noopener">GitHub</a>g
+      <a class="btn" href="https://www.facebook.com/share/1CYXJTJCTR/" target="_blank" rel="noopener">Facebook</a>
+      <a class="btn" href="https://www.instagram.com/olaxcoemerald?knvt=M2sxZXN5NXVyd2t2" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap">© 2026 Ola Mary · Lagos  Nigeria</div></footer>
+
+<script>
+document.documentElement.classList.add("js");
+
+// Sentiment demo
+(function(){
+  const POS = ["love","great","beautiful","fast","good","excellent","amazing","helpful","nice","perfect","happy","quality","recommend","best","lovely","awesome","fantastic","comfortable","fine","worth","satisfied","quick"];
+  const NEG = ["bad","poor","terrible","late","broke","broken","worst","awful","slow","disappointed","disappointing","waste","rude","fake","horrible","hate","cheap","damaged","never","refund","problem","wrong"];
+  const NOT = ["not","no","isn't","wasn't","don't","didn't","never","hardly"];
+  const BUT = ["but","however","though"];
+  const ta = document.getElementById("review");
+  const label = document.getElementById("label"), score = document.getElementById("score");
+  const bar = document.getElementById("bar"), cues = document.getElementById("cues");
+
+  function run(){
+    const words = ta.value.toLowerCase().replace(/[’']/g,"'").match(/[a-z']+/g) || [];
+    let s = 0, found = [], weight = 1;
+    words.forEach((w,i) => {
+      if (BUT.includes(w)) { weight = 1.5; return; }   // words after "but" count more
+      let v = POS.includes(w) ? 1 : NEG.includes(w) && w !== "never" ? -1 : 0;
+      if (!v) return;
+      const prev = words.slice(Math.max(0,i-2), i);
+      if (prev.some(p => NOT.includes(p))) v = -v;
+      s += v * weight;
+      found.push({w, v});
+    });
+    const total = found.length || 1;
+    const norm = Math.max(-1, Math.min(1, s / total));
+    let text, color;
+    if (!found.length) { text = "Neutral"; color = "var(--muted)"; }
+    else if (norm > 0.15) { text = "Positive"; color = "var(--pos)"; }
+    else if (norm < -0.15) { text = "Negative"; color = "var(--neg)"; }
+    else { text = "Mixed"; color = "var(--saffron)"; }
+    label.textContent = text; label.style.color = color;
+    score.textContent = found.length ? "score " + (norm >= 0 ? "+" : "") + norm.toFixed(2) : "no sentiment words found";
+    const w = Math.abs(norm) * 50;
+    bar.style.background = color;
+    bar.style.width = w + "%";
+    bar.style.left = norm >= 0 ? "50%" : (50 - w) + "%";
+    cues.innerHTML = found.length
+      ? "Cues: " + found.map(f => `<mark class="${f.v > 0 ? "p" : "n"}">${f.w}</mark>`).join(" ")
+      : "";
+  }
+  ta.addEventListener("input", run);
+  document.querySelectorAll(".chips button").forEach(b => b.addEventListener("click", () => { ta.value = b.dataset.t; run(); ta.focus(); }));
+  run();
+})();
+
+// Fade sections in as they scroll into view
+(function(){
+  const items = document.querySelectorAll(".reveal");
+  if (!("IntersectionObserver" in window)) { items.forEach(el => el.classList.add("in")); return; }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  items.forEach(el => io.observe(el));
+})();
+
+// Count the project number up when the strip scrolls into view
+(function(){
+  const el = document.querySelector("[data-count]");
+  if (!el || !("IntersectionObserver" in window)) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const target = +el.dataset.count;
+  const io = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) return;
+    io.disconnect();
+    const start = performance.now(), dur = 1000;
+    (function tick(now){
+      const t = Math.min(1, (now - start) / dur);
+      el.textContent = Math.round(target * (1 - Math.pow(1 - t, 3)));
+      if (t < 1) requestAnimationFrame(tick);
+    })(start);
+  }, { threshold: 0.6 });
+  io.observe(el);
+})();
+</script>
+</body>
+</html>
